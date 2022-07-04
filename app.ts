@@ -1,23 +1,20 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import dotenv from "dotenv";
-import cors from "cors";
-
 dotenv.config();
-const port = process.env.PORT;
-const corsOptions = {
-  origin: `https://localhost:${port}`,
-};
+
+import setAppCors from "./app/utils/setAppCors";
+import startDatabaseConnection from "./app/database";
+import setAppRoutes from "./app/routes";
 
 const app: Express = express();
 
-app.use(cors(corsOptions));
+startDatabaseConnection();
+setAppCors(app);
+setAppRoutes(app);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req: Request, res: Response) => {
-  res.json({ message: "hello world" });
-});
-
-app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
+app.listen(process.env.PORT, () => {
+  console.log(`⚡️[server]: Server is running`);
 });
