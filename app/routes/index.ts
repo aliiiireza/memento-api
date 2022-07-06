@@ -1,4 +1,6 @@
 import setEventRoutes from "./Event.routes";
+import setAuthRoutes from "./Auth.routes";
+
 import { Request, Response } from "express";
 
 export default (app) => {
@@ -6,5 +8,6 @@ export default (app) => {
     res.json({ message: "hello world" });
   });
 
+  setAuthRoutes(app);
   setEventRoutes(app);
 };
