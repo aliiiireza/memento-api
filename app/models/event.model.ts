@@ -38,6 +38,7 @@ Event.init(
     },
   },
   {
+    modelName: "event",
     timestamps: true,
     sequelize: sequelizeConnection,
     paranoid: true,

@@ -35,6 +35,7 @@ Role.init(
     },
   },
   {
+    modelName: "role",
     timestamps: true,
     sequelize: sequelizeConnection,
     paranoid: true,
