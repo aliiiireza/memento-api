@@ -1,5 +1,5 @@
-import setEventRoutes from "./Event.routes";
-import setAuthRoutes from "./Auth.routes";
+import setEventRoutes from "./event.routes";
+import setAuthRoutes from "./auth.routes";
 
 import { Request, Response } from "express";
 

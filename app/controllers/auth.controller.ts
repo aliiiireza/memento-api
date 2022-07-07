@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import config from "../config/auth.config";
 import { User, Role } from "../models";
-import { UserInput } from "../models/User.model";
+import { UserInput } from "../models/user.model";
 
 export const register = async (req: Request, res: Response) => {
   try {
