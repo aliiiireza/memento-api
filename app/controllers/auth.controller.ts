@@ -38,12 +38,12 @@ export const login = async (req: Request, res: Response) => {
     expiresIn: 2592000,
   });
 
-  const roles = user.getRoles().map((role) => role.name.toUpperCase());
+  let roles = await user.getRoles()
+  roles = roles.map((role) => role.name.toUpperCase());
 
   res.status(200).send({
     id: user.id,
     username: user.username,
-    email: user.email,
     roles: roles,
     accessToken: token,
   });
