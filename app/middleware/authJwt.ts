@@ -69,10 +69,9 @@ const isModeratorOrAdmin = (req, res, next) => {
     });
   });
 };
-const authJwt = {
+export default{
   verifyToken: verifyToken,
   isAdmin: isAdmin,
   isModerator: isModerator,
   isModeratorOrAdmin: isModeratorOrAdmin,
 };
-module.exports = authJwt;
