@@ -1,7 +1,7 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import sequelizeConnection from "../database/config";
 
-interface RoleAttributes {
+interface EventAttributes {
   id: number;
   name: string;
   createdAt?: Date;
@@ -9,10 +9,13 @@ interface RoleAttributes {
   deletedAt?: Date;
 }
 
-export interface RoleInput extends Optional<RoleAttributes, "id"> {}
-export interface RoleOutput extends Required<RoleAttributes> {}
+export interface EventInput extends Optional<EventAttributes, "id"> {}
+export interface EventOutput extends Required<EventAttributes> {}
 
-class Role extends Model<RoleAttributes, RoleInput> implements RoleAttributes {
+class Event
+  extends Model<EventAttributes, EventInput>
+  implements EventAttributes
+{
   public id!: number;
   public name!: string;
 
@@ -22,7 +25,7 @@ class Role extends Model<RoleAttributes, RoleInput> implements RoleAttributes {
   public readonly deletedAt!: Date;
 }
 
-Role.init(
+Event.init(
   {
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
@@ -35,10 +38,11 @@ Role.init(
     },
   },
   {
+    modelName: "event",
     timestamps: true,
     sequelize: sequelizeConnection,
     paranoid: true,
   }
 );
 
-export default Role;
+export default Event;

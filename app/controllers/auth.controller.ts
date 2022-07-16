@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import config from "../config/auth.config";
 import { User, Role } from "../models";
-import { UserInput } from "../models/User.model";
+import { UserInput } from "../models/user.model";
 
 export const register = async (req: Request, res: Response) => {
   try {
@@ -38,12 +38,12 @@ export const login = async (req: Request, res: Response) => {
     expiresIn: 2592000,
   });
 
-  const roles = user.getRoles().map((role) => role.name.toUpperCase());
+  let roles = await user.getRoles()
+  roles = roles.map((role) => role.name.toUpperCase());
 
   res.status(200).send({
     id: user.id,
     username: user.username,
-    email: user.email,
     roles: roles,
     accessToken: token,
   });

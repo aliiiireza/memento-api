@@ -1,5 +1,5 @@
-import Event from "./Event.model";
-import User from "./User.model";
-import Role from "./Role.model";
+import Event from "./event.model";
+import User from "./user.model";
+import Role from "./role.model";
 
 export { Event, User, Role };
