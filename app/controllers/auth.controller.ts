@@ -1,12 +1,19 @@
 import { Request, Response } from "express";
-import { Op } from "sequelize";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import config from "../config/auth.config";
 import { User, Role } from "../models";
 import { UserInput } from "../models/user.model";
+import * as validations from "../validations";
 
 export const register = async (req: Request, res: Response) => {
+  const isValid: boolean = await validations.validate(
+    validations.register,
+    req,
+    res
+  );
+  if (!isValid) return;
+
   try {
     const { email, password, roles } = req.body;
     const payload: UserInput = {
