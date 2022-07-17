@@ -3,7 +3,7 @@ import sequelizeConnection from "../database/config";
 
 interface UserAttributes {
   id: number;
-  username: string;
+  email: string;
   password: string;
   createdAt?: Date;
   updatedAt?: Date;
@@ -15,7 +15,7 @@ export interface UserOutput extends Required<UserAttributes> {}
 
 class User extends Model<UserAttributes, UserInput> implements UserAttributes {
   public id!: number;
-  public username!: string;
+  public email!: string;
   public password!: string;
 
   // timestamps!
@@ -31,7 +31,7 @@ User.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    username: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
     },

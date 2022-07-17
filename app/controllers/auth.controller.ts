@@ -8,9 +8,9 @@ import { UserInput } from "../models/user.model";
 
 export const register = async (req: Request, res: Response) => {
   try {
-    const { username, password, roles } = req.body;
+    const { email, password, roles } = req.body;
     const payload: UserInput = {
-      username: username,
+      email: email,
       password: bcrypt.hashSync(password, 8),
     };
     const user: any = await User.create(payload);
@@ -22,8 +22,8 @@ export const register = async (req: Request, res: Response) => {
 };
 
 export const login = async (req: Request, res: Response) => {
-  const { username, password } = req.body;
-  const user: any = await User.findOne({ where: { username } });
+  const { email, password } = req.body;
+  const user: any = await User.findOne({ where: { email } });
 
   if (!user) return res.status(404).send({ message: "User Not found." });
 
@@ -38,12 +38,12 @@ export const login = async (req: Request, res: Response) => {
     expiresIn: 2592000,
   });
 
-  let roles = await user.getRoles()
+  let roles = await user.getRoles();
   roles = roles.map((role) => role.name.toUpperCase());
 
   res.status(200).send({
     id: user.id,
-    username: user.username,
+    email: user.email,
     roles: roles,
     accessToken: token,
   });
